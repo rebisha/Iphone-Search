@@ -1,21 +1,21 @@
 import React from 'react';
 import './App.css';
 
-import * as Data from './data'
+import * as Data from './data';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       iphones: [],
       searchTerm: '',
       isSearching: false
-    }
+    };
   }
 
   doSearch = () => {
-    const { searchTerm } = this.state
-    this.setState(Data.getIphones(searchTerm))
+    const { searchTerm } = this.state;
+    this.setState(Data.getIphones(searchTerm));
   }
 
   render() {
@@ -28,10 +28,10 @@ class App extends React.Component {
         </div>
         <div className="content">
           <input placeholder="search" />
-          <button type="button">Search</button>
-          {iphones.length 
+          <button type="button" onClick={this.doSearch}>Search</button>
+          {iphones.length
           ? (
-            <div>got {iphones.length} iphones</div> 
+            <div>got {iphones.length} iphones</div>
           )
           : <div id="results">Do a search to find iphones</div>
           }
