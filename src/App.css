@@ -7,7 +7,7 @@ Add any additional CSS rules to style the form and search results output.
 */
 
 .page {
-    width: 100%;
+    width: 90%;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -51,8 +51,8 @@ Add any additional CSS rules to style the form and search results output.
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
-    width: 15%;
-    margin-left: 20px;
+    width: auto;
+    margin-left: 15px;
     cursor: pointer;
 }
 
@@ -94,10 +94,6 @@ input {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-.iphone-results {
-
-}
-
 li {
     list-style: none;
     padding: 10px;
@@ -108,8 +104,17 @@ span {
     line-height: 1.5;
 }
 
+.is-searching {
+    padding: 10px;
+}
+
 @media screen and (min-width: 768px) {
     .page {
         max-width: 70%;
+    }
+
+    .btn {
+        width: 15%;
+        margin-left: 20px;
     }
 }

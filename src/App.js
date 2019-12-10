@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import * as Data from './data';
 
-//import ResultFound from './component/resultFound';
+import ResultFound from './component/resultFound';
+import ResultNotFound from './component/resultNotFound';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,21 +18,20 @@ class App extends React.Component {
   doSearch = () => {
     var { searchterm } = this.state;
     const iphone =  Data.getIphones(searchterm)
-    iphone.then(response =>  this.setState({ 
+    iphone.then(response =>  this.setState({
       iphones: response,
       isSearching: true
      }));
   }
 
-  onChange = (e) => {    
+  onChange = (e) => {
     this.setState({
         searchterm : e.target.value
     });
   }
 
   render() {
-    console.log('iphones', this.state.iphones)
-    const { iphones, searchterm, isSearching } = this.state
+    const { iphones, searchterm, isSearching } = this.state;
     return (
       <div className="page">
         <div className="header">
@@ -45,25 +45,18 @@ class App extends React.Component {
           </div>
           {isSearching ? (iphones.length
           ? (
-            <div className="iphone-results">
-              {iphones.map(item => {
-                return (
-                  <li>
-                    <span>Name: {item.name}</span> 
-                    <span>Color: {item.color}</span>
-                    <span>Capacity: {item.capacity}</span>
-                    <span>Price: {item.price}</span>
-                  </li>                
-                )
-              })}              
+            <div className="result-found">
+              <ResultFound iphones={iphones} />
             </div>
           )
-          : <div id="results">
-              <li>Sorry result not found. Try again.</li>
+          : <div className="result-not-found">
+              <ResultNotFound />
             </div>
           )
-          : <span>Loading...</span>
-          }          
+          : <div className="is-searching">
+              <span>Loading...</span>
+            </div>
+          }
         </div>
         <div className="footer">
           <p className="links">&copy; 2018 Fake Company</p>
