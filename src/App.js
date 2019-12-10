@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-
 import * as Data from './data';
 
 class App extends React.Component {
@@ -8,27 +7,37 @@ class App extends React.Component {
     super(props);
     this.state = {
       iphones: [],
-      searchTerm: '',
+      searchterm: '',
       isSearching: false
     };
   }
 
   doSearch = () => {
-    const { searchTerm } = this.state;
-    this.setState(Data.getIphones(searchTerm));
+    var { searchterm } = this.state;
+    const iphone =  Data.getIphones(searchterm)
+    iphone.then(response =>  this.setState({ iphones: response }));
+  }
+
+  onChange = (e) => {
+    e.preventDefault();
+    this.setState({
+        searchterm : e.target.value
+    });
   }
 
   render() {
-    const { iphones } = this.state
+    const { iphones, searchterm } = this.state
     return (
       <div className="page">
         <div className="header">
-          <div className="logo"></div>
-          <h1>ACME inc</h1>
+          <div className="logo" />
+          <h1>ACME Inc</h1>
         </div>
         <div className="content">
-          <input placeholder="search" />
-          <button type="button" onClick={this.doSearch}>Search</button>
+          <div className="input-field">
+            <input placeholder="search" searchterm={searchterm} onChange={this.onChange}/>
+            <button className="btn btn-primary" type="button" onClick={this.doSearch}>Search</button>
+          </div>
           {iphones.length
           ? (
             <div>got {iphones.length} iphones</div>
@@ -37,10 +46,10 @@ class App extends React.Component {
           }
         </div>
         <div className="footer">
-          <p>&copy; 2018 Fake Company</p>
-          <ul>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <p className="links">&copy; 2018 Fake Company</p>
+          <ul className="footer-links">
+            <li className="links"><a href="/privacy">Privacy Policy</a></li>
+            <li className="links"><a href="/terms">Terms &amp; Conditions</a></li>
           </ul>
         </div>
       </div>

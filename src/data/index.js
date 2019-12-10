@@ -1,19 +1,30 @@
-export const getIphones = (searchTerm) => {
+export const getIphones = (searchterm) => {
   // use the fetch API to load iphones.json to iphones variable
-
-  const iphones = [
-    fetch('./iphones.json')
-    .then((response) => response.json())
-  ];
-
-  console.log(iphones);
-  // after this has loaded call the filterIphones() function below to filter the results
-  return filterIphones(iphones, searchTerm);
+return  fetch('/iphones.json')
+          .then(response =>  response.json())
+          .then(parsedJson => {
+            const iphones = parsedJson;
+            return filterIphones(iphones, searchterm);
+          });
 };
 
-export const filterIphones = (iphones, searchTerm) => {
+export const filterIphones = (iphones, searchterm) => {
   return iphones.filter(iphone => {
-    // filter the iphone
-    return iphone
-  })
+    return filterIphone(iphone, searchterm);
+  });
 };
+
+function filterIphone(iphones, searchterm) {
+  if(iphones.color.toLowerCase().includes(searchterm)) {
+    return iphones;
+  } else if(iphones.capacity.toLowerCase().includes(searchterm)) {
+    return iphones;
+  } else if(iphones.name.toLowerCase().includes(searchterm)) {
+    return iphones;
+  } else if(iphones.price === parseInt(searchterm)) {
+    return iphones;
+  }  else {
+    console.log('not the same');
+    return false;
+  }
+}
