@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import * as Data from './data';
 
+//import ResultFound from './component/resultFound';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -15,18 +17,21 @@ class App extends React.Component {
   doSearch = () => {
     var { searchterm } = this.state;
     const iphone =  Data.getIphones(searchterm)
-    iphone.then(response =>  this.setState({ iphones: response }));
+    iphone.then(response =>  this.setState({ 
+      iphones: response,
+      isSearching: true
+     }));
   }
 
-  onChange = (e) => {
-    e.preventDefault();
+  onChange = (e) => {    
     this.setState({
         searchterm : e.target.value
     });
   }
 
   render() {
-    const { iphones, searchterm } = this.state
+    console.log('iphones', this.state.iphones)
+    const { iphones, searchterm, isSearching } = this.state
     return (
       <div className="page">
         <div className="header">
@@ -38,12 +43,27 @@ class App extends React.Component {
             <input placeholder="search" searchterm={searchterm} onChange={this.onChange}/>
             <button className="btn btn-primary" type="button" onClick={this.doSearch}>Search</button>
           </div>
-          {iphones.length
+          {isSearching ? (iphones.length
           ? (
-            <div>got {iphones.length} iphones</div>
+            <div className="iphone-results">
+              {iphones.map(item => {
+                return (
+                  <li>
+                    <span>Name: {item.name}</span> 
+                    <span>Color: {item.color}</span>
+                    <span>Capacity: {item.capacity}</span>
+                    <span>Price: {item.price}</span>
+                  </li>                
+                )
+              })}              
+            </div>
           )
-          : <div id="results">Do a search to find iphones</div>
-          }
+          : <div id="results">
+              <li>Sorry result not found. Try again.</li>
+            </div>
+          )
+          : <span>Loading...</span>
+          }          
         </div>
         <div className="footer">
           <p className="links">&copy; 2018 Fake Company</p>

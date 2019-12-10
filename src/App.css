@@ -94,8 +94,18 @@ input {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-button {
+.iphone-results {
 
+}
+
+li {
+    list-style: none;
+    padding: 10px;
+    display: grid;
+}
+
+span {
+    line-height: 1.5;
 }
 
 @media screen and (min-width: 768px) {
