@@ -36,12 +36,11 @@ class App extends React.Component {
       <div className="page">
         <div className="header">
           <div className="logo" />
-          <h1>ACME Inc</h1>
         </div>
         <div className="content">
           <div className="input-field">
             <input placeholder="search" searchterm={searchterm} onChange={this.onChange}/>
-            <button className="btn btn-primary" type="button" onClick={this.doSearch}>Search</button>
+            <button className="btn" type="button" onClick={this.doSearch}>Search</button>
           </div>
           {isSearching ? (iphones.length
           ? (

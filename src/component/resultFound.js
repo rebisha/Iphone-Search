@@ -2,7 +2,7 @@ import React from 'react';
 
 const ResultFound = ({iphones}) => {
     return (
-        <ul>
+        <ul className="result-found-list">
             {
                 iphones.map(item => {
                     return (

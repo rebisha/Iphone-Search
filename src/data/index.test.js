@@ -1,11 +1,20 @@
-import { filterIphones } from './'
+import { filterIphones } from './';
 
-describe('Data module', () => {
-  describe('filterIphones', () => {
-    it('Should do something', () => {
-      expect(filterIphones([], '')).toEqual([
-        { foo: 'bar' }
-      ])
-    })
-  })
-})
+describe('filterIphones', () => {
+  it('Should do something', () => {
+    const iPhones = [{
+      "name": "iphone",
+      "capacity": "64GB",
+      "color": "Silver"
+    }];
+    const searchTerm = "iphone";
+
+    expect(filterIphones(iPhones, searchTerm)).toEqual([
+      {
+        color: 'Silver',
+        capacity : '64GB',
+        name: 'iphone'
+      }
+    ]);
+  });
+});
